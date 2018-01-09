@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="Ryze">
 <meta property="og:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、获得官方的docker-entrypoint.sh文">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T03:46:20.000Z">
+<meta property="og:updated_time" content="2018-01-09T03:52:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker下使用mysql">
 <meta name="twitter:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、获得官方的docker-entrypoint.sh文">
@@ -373,19 +373,13 @@
 <p>开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式</p>
 </blockquote>
 <h3 id="一、从公共仓库拉取镜像"><a href="#一、从公共仓库拉取镜像" class="headerlink" title="一、从公共仓库拉取镜像"></a>一、从公共仓库拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
-<h3 id="二、获得官方的docker-entrypoint-sh文件"><a href="#二、获得官方的docker-entrypoint-sh文件" class="headerlink" title="二、获得官方的docker-entrypoint.sh文件"></a>二、获得官方的docker-entrypoint.sh文件</h3><blockquote>
-<p>根据不同的版本下载不同的docker-entrypoint.sh文件，我使用的mysql5.7，所以下载的是5.7对应的版本  </p>
-</blockquote>
+<h3 id="二、获得官方的docker-entrypoint-sh文件"><a href="#二、获得官方的docker-entrypoint-sh文件" class="headerlink" title="二、获得官方的docker-entrypoint.sh文件"></a>二、获得官方的docker-entrypoint.sh文件</h3><p>根据不同的版本下载不同的docker-entrypoint.sh文件，我这里使用的mysql5.7，所以下载的是5.7对应的版本  </p>
 <p><a href="https://github.com/docker-library/mysql" target="_blank" rel="external">docker-entrypoint.sh文件获取地址</a></p>
-<blockquote>
 <p>将文件复制到本地之后，还要把文件放入到<code>/usr/local/bin/</code>中 (只针对macos)，接下来就可以创建容器了。</p>
-</blockquote>
-<h3 id="三、创建容器"><a href="#三、创建容器" class="headerlink" title="三、创建容器"></a>三、创建容器</h3><blockquote>
-<p>在创建容器之前创建三个文件夹<code>data cnf logs</code> 。</p>
-</blockquote>
+<h3 id="三、创建容器"><a href="#三、创建容器" class="headerlink" title="三、创建容器"></a>三、创建容器</h3><p>在创建容器之前创建三个文件夹<code>data cnf logs</code> 。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p /mysql/data /mysql/cnf /mysql/logs</div></pre></td></tr></table></figure>
 <p>data目录将映射为mysql容器配置的数据文件存放路径<br>logs目录将映射为mysql容器的日志目录<br>conf目录里的配置文件将映射为mysql容器的配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306:3306 --name mysql -v /mysql/data:/var/lib/mysql -v /mysql/cnf:/etc/mysql/cnf.d -e MYSQL_ROOT_PASSWORD=135256 -d registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306:3306 --name mysql -v /mysql/data:/var/lib/mysql -v /mysql/cnf:/etc/mysql/cnf.d -v /mysql/logs:/etc.log/mysql/<span class="built_in">log</span> -e MYSQL_ROOT_PASSWORD=135256 -d registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
       
     </div>
     

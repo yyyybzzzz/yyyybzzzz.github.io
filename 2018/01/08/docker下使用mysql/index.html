@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
+<meta name="description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、获得官方的docker-entrypoint.sh文">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker下使用mysql">
 <meta property="og:url" content="https://yyyybzzzz.github.io/2018/01/08/docker下使用mysql/index.html">
 <meta property="og:site_name" content="Ryze">
-<meta property="og:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
+<meta property="og:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、获得官方的docker-entrypoint.sh文">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T03:11:11.000Z">
+<meta property="og:updated_time" content="2018-01-09T03:28:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker下使用mysql">
-<meta name="twitter:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
+<meta name="twitter:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、获得官方的docker-entrypoint.sh文">
 
 
 
@@ -373,7 +373,8 @@
 <p>开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式</p>
 </blockquote>
 <h3 id="一、从公共仓库拉取镜像"><a href="#一、从公共仓库拉取镜像" class="headerlink" title="一、从公共仓库拉取镜像"></a>一、从公共仓库拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
-<h3 id="二、创建容器"><a href="#二、创建容器" class="headerlink" title="二、创建容器"></a>二、创建容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306:3306 --name mysql -v /code/mysql/data:/var/lib/mysql -v /code/mysql/cnf:/etc/mysql/cnf.d -e MYSQL_ROOT_PASSWORD=135256 -d registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
+<h3 id="二、获得官方的docker-entrypoint-sh文件"><a href="#二、获得官方的docker-entrypoint-sh文件" class="headerlink" title="二、获得官方的docker-entrypoint.sh文件"></a>二、获得官方的docker-entrypoint.sh文件</h3><h3 id="根据不同的版本下载不同的docker-entrypoint-sh文件，我使用的mysql5-7，所以下载的是5-7对应的版本"><a href="#根据不同的版本下载不同的docker-entrypoint-sh文件，我使用的mysql5-7，所以下载的是5-7对应的版本" class="headerlink" title="根据不同的版本下载不同的docker-entrypoint.sh文件，我使用的mysql5.7，所以下载的是5.7对应的版本"></a>根据不同的版本下载不同的docker-entrypoint.sh文件，我使用的mysql5.7，所以下载的是5.7对应的版本</h3><p><a href="https://github.com/docker-library/mysql" target="_blank" rel="external">docker-entrypoint.sh文件获取地址</a></p>
+<h3 id="将文件复制到本地之后，还要把文件放入到-usr-local-bin-中"><a href="#将文件复制到本地之后，还要把文件放入到-usr-local-bin-中" class="headerlink" title="将文件复制到本地之后，还要把文件放入到/usr/local/bin/中"></a>将文件复制到本地之后，还要把文件放入到<code>/usr/local/bin/</code>中</h3><h3 id="三、创建容器"><a href="#三、创建容器" class="headerlink" title="三、创建容器"></a>三、创建容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306:3306 --name mysql -v /code/mysql/data:/var/lib/mysql -v /code/mysql/cnf:/etc/mysql/cnf.d -e MYSQL_ROOT_PASSWORD=135256 -d registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -571,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、从公共仓库拉取镜像"><span class="nav-number">1.</span> <span class="nav-text">一、从公共仓库拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、创建容器"><span class="nav-number">2.</span> <span class="nav-text">二、创建容器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、从公共仓库拉取镜像"><span class="nav-number">1.</span> <span class="nav-text">一、从公共仓库拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、获得官方的docker-entrypoint-sh文件"><span class="nav-number">2.</span> <span class="nav-text">二、获得官方的docker-entrypoint.sh文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据不同的版本下载不同的docker-entrypoint-sh文件，我使用的mysql5-7，所以下载的是5-7对应的版本"><span class="nav-number">3.</span> <span class="nav-text">根据不同的版本下载不同的docker-entrypoint.sh文件，我使用的mysql5.7，所以下载的是5.7对应的版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文件复制到本地之后，还要把文件放入到-usr-local-bin-中"><span class="nav-number">4.</span> <span class="nav-text">将文件复制到本地之后，还要把文件放入到/usr/local/bin/中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、创建容器"><span class="nav-number">5.</span> <span class="nav-text">三、创建容器</span></a></li></ol></div>
             
 
           </div>

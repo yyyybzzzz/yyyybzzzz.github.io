@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。  zyb">
+<meta name="description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
 <meta name="keywords" content="docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker下使用mysql">
 <meta property="og:url" content="https://yyyybzzzz.github.io/2018/01/08/docker下使用mysql/index.html">
 <meta property="og:site_name" content="Ryze">
-<meta property="og:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。  zyb">
+<meta property="og:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-08T15:35:07.000Z">
+<meta property="og:updated_time" content="2018-01-09T03:11:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker下使用mysql">
-<meta name="twitter:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。  zyb">
+<meta name="twitter:description" content="开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式  一、从公共仓库拉取镜像1docker pull registry.docker-cn.com/library/mysql:5.7 二、创建容器1docker run -p 3306:33">
 
 
 
@@ -370,9 +370,10 @@
 
       
         <blockquote>
-<p>开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。</p>
+<p>开发过程中经常需要安装、调试mysql数据库，还需要在各种操作系上安装包依赖，实在是繁琐，因此就研究了一下如何在docker上运行一个mysql镜像，省却了我安装、找依赖的问题。本次安装采用的是拉取镜像的方式</p>
 </blockquote>
-<h2 id="zyb"><a href="#zyb" class="headerlink" title="zyb"></a>zyb</h2>
+<h3 id="一、从公共仓库拉取镜像"><a href="#一、从公共仓库拉取镜像" class="headerlink" title="一、从公共仓库拉取镜像"></a>一、从公共仓库拉取镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
+<h3 id="二、创建容器"><a href="#二、创建容器" class="headerlink" title="二、创建容器"></a>二、创建容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -p 3306:3306 --name mysql -v /code/mysql/data:/var/lib/mysql -v /code/mysql/cnf:/etc/mysql/cnf.d -e MYSQL_ROOT_PASSWORD=135256 -d registry.docker-cn.com/library/mysql:5.7</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -570,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#zyb"><span class="nav-number">1.</span> <span class="nav-text">zyb</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、从公共仓库拉取镜像"><span class="nav-number">1.</span> <span class="nav-text">一、从公共仓库拉取镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、创建容器"><span class="nav-number">2.</span> <span class="nav-text">二、创建容器</span></a></li></ol></div>
             
 
           </div>
